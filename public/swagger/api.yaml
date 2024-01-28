@@ -1,0 +1,21 @@
+openapi: 3.0.3
+info:
+  title: Swagger Poulstar Social Media - OpenAPI 3.0
+  description: for learn swagger and yaml
+  version: 1.0.0
+tags:
+  - name: User
+    description: Everything about your Users
+  - name: Post
+    description: Everything about your Posts
+  - name: Comment
+    description: Everything about your Comments
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: "Authorization: Bearer <token>"
+      Authorization: Bearer <token>
+      scheme: bearer
+      bearerFormat: JWT
