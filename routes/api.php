@@ -18,4 +18,5 @@ Route::Group([
     Route::post('update-user-by-admin/{user}', [UserController::class, 'updateUserByAdmin'])->middleware(['can:'.Permissions::UPDATE_ANY_ACCOUNT]);
     Route::delete('delete-user-by-admin/{user}', [UserController::class, 'deleteUserByAdmin'])->middleware(['can:'.Permissions::DELETE_ANY_ACCOUNT]);
     Route::get('all-posts-for-dashboard', [PostController::class, 'allPostsForDashboard'])->middleware(['can:'.Permissions::VIEW_ANY_POST]);
+    Route::get('posts/{post}/like', [PostController::class, 'likePost'])->middleware(['can:'.Permissions::LIKE_ANY_POST]);
 });

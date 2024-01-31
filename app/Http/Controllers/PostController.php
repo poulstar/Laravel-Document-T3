@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\UpVote;
 
 class PostController extends Controller
 {
@@ -29,5 +31,20 @@ class PostController extends Controller
             'posts' => $this->paginatedSuccessResponse($posts,'posts'),
             'topPosts' => $topPosts,
         ],200);
+    }
+    public function likePost(Post $post) {
+        $upVote = UpVote::where('user_id', Auth::id())
+            ->where('post_id', $post->id)
+            ->first();
+        if($upVote) {
+            $upVote->delete();
+            return $this->successResponse(['message' => 'Post like removed', 'vote' => -1]);
+        }else {
+            $upVote = new UpVote();
+            $upVote->user()->associate(Auth::id());
+            $upVote->post()->associate($post->id);
+            $upVote->save();
+            return $this->successResponse(['message' => 'Post like added', 'vote' => 1]);
+        }
     }
 }

@@ -353,3 +353,25 @@ paths:
                 $ref: "#/components/schemas/ApiResponse"
       security:
         - bearerAuth: []
+  /api/posts/{post}/like:
+    get:
+      tags:
+        - Post
+      summery: like post
+      description: user can like or dislike post
+      parameters:
+        - name: post
+          in: path
+          description: Post ID
+          schema:
+            type: integer
+          required: true
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+      security:
+        - bearerAuth: []
